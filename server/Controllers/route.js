@@ -1,21 +1,65 @@
+const Book = require('../Models/bookModel');
+
+
 const getAllBooks = async (req , res) => {
- res.status(200).json({response : 'get all books'})   
+ try {
+  const resp = await Book.find({})
+  res.status(200).json({Data : resp}) 
+} catch (error) {
+    
+ }
 }
 
 const getSingleBook = async (req ,res) => {
-    res.status(200).json({response: 'get single Book'})
+    try {
+        const {id} = req.params
+        const resp = await Book.findOne({_id : id})
+        if(!resp) {
+            return res.status(404).json({error : 'data can not be found'})
+        }
+        res.status(200).json({data : resp})
+
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 const postBook = async (req , res) => {
-    res.status(201).json({response : 'book is created'})
+      const {title , author , publishYear} = req.body
+    try {
+        const resp = await Book.create({
+            title , author , publishYear
+        })
+        res.status(201).json({response : resp})
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 const deleteBook = async (req, res) => {
-    res.status(200).json({response : 'book is deleted ! '})
+     const {id} = req.params
+    try {
+      const resp = await Book.findOneAndDelete({_id : id})  
+      if(!resp) {
+        return res.status(404).json({error : 'Book does not exist'})
+      }
+      res.status(200).json({data : resp})    
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 const updateBook = async (req ,res) => {
-   res.status(200).json({response : 'book is updated'})
+   const {id} = req.params
+   try {
+    const resp = await Book.findOneAndUpdate({_id : id} , req.body , {
+        new : true ,
+        runValidators : true,
+    } )
+    res.status(200).json({data : resp})
+   } catch (error) {
+    console.log(error);
+   }
 }
 
 module.exports = {
