@@ -1,130 +1,132 @@
 import React from 'react'
-import { useEffect } from 'react'
-import { useState } from 'react'
 import styled from 'styled-components'
-import axios from 'axios'
-import { AiOutlineEdit } from 'react-icons/ai'
+import { AiOutlineEdit , AiOutlineHome, AiOutlinePlusSquare } from 'react-icons/ai'
 import { HiOutlineInformationCircle } from 'react-icons/hi'
 import { FiTrash } from 'react-icons/fi'
+import { Link } from 'react-router-dom'
 
 const Container = styled.div`
 height: 100vh;
 background-color: #f3f5f9;
+text-transform: capitalize;
 `
 const BookContainer = styled.div`
 text-align: center;
-padding-top: 5rem ;
+padding-top: 2rem ;
 `
-const Book = styled.div`
+
+const Plus = styled.div`
+width: 90%;
 display: flex;
-flex-direction: row;
+justify-content: end;
+margin: 2rem auto;
+`
+
+const IconPlus = styled(AiOutlinePlusSquare)`
+cursor: pointer;
+`
+
+
+const Title = styled.h2`
+display: flex;
 justify-content: center;
-align-items: center;
-margin: auto;
-margin: 2rem 2rem;
-text-transform: capitalize;
-background-color: #fff;
-gap: 1rem;
+margin: 2rem auto;
+
 `
 
-
-const Title = styled.h4`
-flex: 1;
-border : 1px solid rgba(0,0,0,1);
-border-radius:5px;
-font-weight: 300;
-`
-    
-const Author = styled.h4`
-flex: 1;
-border : 1px solid rgba(0,0,0,1);
-border-radius:5px;
-font-weight: 300;
-`
-
-const PublishYear = styled.h4`
-flex: 1;
-border : 1px solid rgba(0,0,0,1);
-border-radius:5px;
-font-weight: 300;
-`
 const Edit = styled.div`
-flex:1;
-border : 1px solid rgba(0,0,0,1);
 border-radius:5px;
-font-weight: 300;
 `
 
 const Icons = styled.div`
-flex :1 ;
-display: flex;
-justify-content: center;
+
 `
 const IconI = styled(HiOutlineInformationCircle)`
 margin-right: 1rem;
+cursor: pointer;
 `
 
 const IconEdit = styled(AiOutlineEdit)`
 margin-right: 1rem;
+cursor: pointer;
 `
 
-const IconTrash = styled(FiTrash)``
-    
+const IconTrash = styled(FiTrash)`
+cursor: pointer;
+`
+
+const Table = styled.table`
+width: 90%;
+margin: auto;
+background-color: #fff;
+border-radius: 5px;
+`
+
+const Thead = styled.thead``
+
+const Tbody = styled.tbody``
+
+const Tr = styled.tr`
+height: 3rem;
+`
+
+const Th = styled.th`
+text-transform: capitalize;
+border : 3px solid rgba(0,0,0,0.7) ;
+border-radius: 5px;
+`
+
+const Td = styled.td`
+`
 
 
+const Home = ({data,DeleteBook}) => {
 
-
-
-const Home = () => {
-const API_URL = 'http://127.0.0.1:5174/api/v1/books/'
- 
-
-   const [data , setData] = useState([])
-
-
-const fetchData = async () => {
-    try {
-        const resp = await axios.get(API_URL + 'all' , {
-            method : "GET"
-        })
-        setData(resp.data.data)
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-useEffect(()=>{
-    fetchData()
-},[])
-
-console.log(data);
   return (
     <Container>
+           <AiOutlineHome style={{marginLeft : '5rem' , marginTop:'2rem' , cursor:'pointer'}} size={25} />
         <BookContainer>
-            <h2>Book</h2>
-            <>
-          {data.map(({_id,title,author,publishYear})=> {
-            return (
-                  <Book key={_id}>
-                     <Title>title : {title}</Title>
-                     <Author>Author : {author}</Author>
-                     <PublishYear>Publish Year {publishYear}</PublishYear>
-                     <Edit>
-                         <Icons>
-                            <IconI size='1rem' color='indigo' />
-                            <IconEdit size='1rem' color='green' />
-                            <IconTrash size='1rem' color='red'/>
-                         </Icons>
-
-                     </Edit>
-
-                </Book>
+            <Title>Book List</Title>
+             <Plus>
+              <Link to={'/addbook'}>
+                  <IconPlus size={35} color='green'/>
+              </Link>
+            
+             </Plus>
+            <Table> 
+              <Thead>
+                <Tr>
+                  <Th>no</Th>
+                  <Th>title</Th>
+                  <Th>author</Th>
+                  <Th>published Year</Th>
+                  <Th>Operations</Th>
+                </Tr>
+              </Thead>
+            {data.map(({_id,title,author,publishYear},index)=> {
+              return (
+                <Tbody key={_id}>
+                  <Tr >
+                      <Td>{index+1}</Td>
+                      <Td>{title}</Td>
+                      <Td>{author}</Td>
+                      <Td>{publishYear}</Td>
+                        <Td>
+                        <Edit>
+                          <Icons>
+                            <IconI size='20' color='#0ea5e9' />
+                          <Link to={`/editbook/${_id}`}>
+                            <IconEdit size='20' color='green'  />
+                         </Link>
+                            <IconTrash onClick={()=>DeleteBook(_id)} size='20' color='red' />
+                          </Icons>
+                        </Edit>
+                        </Td>
+                  </Tr>
+                </Tbody>
             )
-          })}
-                
-             
-        </>
-
+            })}
+            </Table>        
         </BookContainer>
     </Container>
   )
