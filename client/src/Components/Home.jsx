@@ -31,7 +31,6 @@ const Title = styled.h2`
 display: flex;
 justify-content: center;
 margin: 2rem auto;
-
 `
 
 const Edit = styled.div`
@@ -62,9 +61,12 @@ background-color: #fff;
 border-radius: 5px;
 `
 
-const Thead = styled.thead``
+const Thead = styled.thead`
+`
 
-const Tbody = styled.tbody``
+const Tbody = styled.tbody`
+
+`
 
 const Tr = styled.tr`
 height: 3rem;
@@ -72,15 +74,16 @@ height: 3rem;
 
 const Th = styled.th`
 text-transform: capitalize;
-border : 3px solid rgba(0,0,0,0.7) ;
-border-radius: 5px;
+font-size: 1.2rem;
+font-weight: 800;
+/* border : 3px solid rgba(0,0,0,0.7) ; */
 `
 
 const Td = styled.td`
 `
 
 
-const Home = ({data,DeleteBook}) => {
+const Home = ({data,deleteBook}) => {
 
   return (
     <Container>
@@ -118,7 +121,7 @@ const Home = ({data,DeleteBook}) => {
                           <Link to={`/editbook/${_id}`}>
                             <IconEdit size='20' color='green'  />
                          </Link>
-                            <IconTrash onClick={()=>DeleteBook(_id)} size='20' color='red' />
+                            <IconTrash onClick={()=>deleteBook(_id)} size='20' color='red' />
                           </Icons>
                         </Edit>
                         </Td>

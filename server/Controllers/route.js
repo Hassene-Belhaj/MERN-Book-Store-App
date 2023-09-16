@@ -1,12 +1,26 @@
 const Book = require('../Models/bookModel');
 
 
+const uploadImage = async(req, res)=> {
+    try {    
+    const {image} = req.body    
+    const resp = await Book.create({
+        image : image
+    })  
+    res.status(201).json({image : resp})  
+    } catch (error) {
+        res.status(500).json({err : error})
+    }
+}
+
+
 const getAllBooks = async (req , res) => {
  try {
   const resp = await Book.find({})
   res.status(200).json({data : resp}) 
 } catch (error) {
-    
+    res.status(500).json({err : error})
+
  }
 }
 
@@ -20,7 +34,7 @@ const getSingleBook = async (req ,res) => {
         res.status(200).json({data : resp})
 
     } catch (error) {
-        console.log(error);
+       res.status(500).json({err : error})
     }
 }
 
@@ -32,7 +46,7 @@ const postBook = async (req , res) => {
         })
         res.status(201).json({response : resp})
     } catch (error) {
-        console.log(error);
+        res.status(500).json({err : error})
     }
 }
 
@@ -45,7 +59,7 @@ const deleteBook = async (req, res) => {
       }
       res.status(200).json({data : resp})    
     } catch (error) {
-        console.log(error);
+        res.status(500).json({err : error})
     }
 }
 
@@ -58,10 +72,10 @@ const updateBook = async (req ,res) => {
     } )
     res.status(200).json({data : resp})
    } catch (error) {
-    console.log(error);
+    res.status(500).json({err : error})
    }
 }
 
 module.exports = {
-    getAllBooks,getSingleBook,postBook,deleteBook,updateBook
+    getAllBooks,getSingleBook,postBook,deleteBook,updateBook,uploadImage
 };

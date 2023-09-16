@@ -7,20 +7,20 @@ const Container = styled.div`
 height: 100vh;
 text-transform: capitalize;
 background-color: #f3f5f9;
-/* display: flex;
-justify-content: center; */
 `
 
 const Title = styled.h2`
 text-align: center;
-padding: 2rem 0;
+padding: .5rem 0;
 `
 
 const AdBook = styled.div`
-width: 30%;
+max-width: 600px;
 padding: 2rem;
-border: 2px solid #000;
+border: 2px solid rgba(0,0,0,0.2);
+border-radius: 10px;
 margin: 5rem auto;
+background-color: #fff;
 `
 const Form = styled.form`
 display: flex;
@@ -39,7 +39,7 @@ padding: .5rem .5rem;
 font-size: 1.2rem;
 border-radius: 5px;
 outline: none;
-border: 2px solid rgba(0,0,0,0.4);
+border: 2px solid rgba(0,0,0,0.2);
 transition: all ease-in-out 0.4s;
 &:focus{
     border: 2px solid rgba(0,0,0,0.8);
@@ -68,11 +68,11 @@ const AddBook = ({addBook,title,author,publishYear,setTitle,setAuthor,setPublish
 const navigate = useNavigate()
 
 const handleSubmit = () => {
-    addBook();
-    navigate('/');
-    setTitle('');
-    setAuthor('');
-    setPublishYear('');
+    if(title.length > 2) {
+        addBook();
+        navigate('/');
+        
+    }
  }
 
   return (

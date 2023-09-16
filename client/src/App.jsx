@@ -4,7 +4,7 @@ import Home from './Components/Home'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import axios from 'axios'
-import { BrowserRouter as Router , Routes,Route } from 'react-router-dom'
+import { BrowserRouter as Router , Routes,Route, useNavigate } from 'react-router-dom'
 import EditBook from './Pages/EditBook'
 import AddBook from './Pages/AddBook'
 
@@ -17,6 +17,7 @@ const App = () => {
   const [data , setData] = useState([])
   const [title , setTitle] = useState('')
   const [author , setAuthor] = useState('')
+
   const [publishYear , setPublishYear] = useState('')
   
   
@@ -50,7 +51,7 @@ const addBook = async () => {
 
 
 
- const DeleteBook = async (id) => {
+ const deleteBook = async (id) => {
   try {
     await axios.delete(API_URL + '/delete/' + id , {
     method : 'DELETE' ,
@@ -58,17 +59,29 @@ const addBook = async () => {
   } catch (error) {
     console.log(error);
   }
-
  }
 
+ const updateBook = async(id) => {
+  try {
+    const resp =  await axios.patch(API_URL + '/update/' + id , {
+      method : 'PATCH',
+      title : title,
+      author:author ,
+      publishYear : publishYear,
+    })
+    
+  } catch (error) {
+    console.log(error);
+  }
+ }
 
   return (
     <Router>
       <GlobalStyleApp />
       <Routes>
-        <Route path='/' element={< Home data={data} DeleteBook={DeleteBook}/>} />
+        <Route path='/' element={< Home data={data} deleteBook={deleteBook}/>} />
         <Route path='/addbook' element={<AddBook  addBook={addBook} title={title} author={author} publishYear={publishYear}  setTitle={setTitle} setAuthor={setAuthor} setPublishYear={setPublishYear} />} />
-        <Route path='/editbook/:id' element={<EditBook/>} />
+        <Route path='/editbook/:id' element={<EditBook data={data} updateBook={updateBook} addBook={addBook} title={title} author={author} publishYear={publishYear}  setTitle={setTitle} setAuthor={setAuthor} setPublishYear={setPublishYear} />} />
       </Routes> 
     </Router>
   )
