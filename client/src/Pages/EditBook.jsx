@@ -64,7 +64,7 @@ cursor: pointer;
 
 
 
-const EditBook = ({updateBook,data,title,author,publishYear,setTitle,setAuthor,setPublishYear}) => {
+const EditBook = ({setMsg,setShowModel,updateBook,data,title,author,publishYear,setTitle,setAuthor,setPublishYear}) => {
 
   const {id} =  useParams()
 
@@ -79,10 +79,20 @@ useEffect(()=>{
 },[])
 
 
-const handleSubmit= (id) => {
-    updateBook(id)
-    navigate('/')
+
+
+
+const handleSubmit = (id) => {
+  updateBook(id);
+  navigate('/');
+  setTimeout(() => {
+  setShowModel(false) 
+  setMsg('')
+  }, 2000)
+  setMsg('book updated Successfully')
+  setShowModel(true)
 }
+
 
 
   return (
@@ -99,7 +109,7 @@ const handleSubmit= (id) => {
                 <Input type='text' value={author} onChange={e=>setAuthor(e.target.value)}   />
                 <Label>publish year</Label>
                 <Input type='number' value={publishYear} onChange={e=>setPublishYear(e.target.value)}   />
-               <Button onClick={()=>handleSubmit(findBook._id)}>update Book</Button>
+               <Button onClick={()=>handleSubmit(findBook?._id)}>update Book</Button>
             </Form>
         </AdBook>
     </Container>

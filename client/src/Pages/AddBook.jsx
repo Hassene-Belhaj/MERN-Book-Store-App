@@ -63,7 +63,7 @@ cursor: pointer;
 
 
 
-const AddBook = ({addBook,title,author,publishYear,setTitle,setAuthor,setPublishYear}) => {
+const AddBook = ({setMsg,addBook,title,author,publishYear,setTitle,setAuthor,setPublishYear,setShowModel}) => {
 
 const navigate = useNavigate()
 
@@ -71,7 +71,12 @@ const handleSubmit = () => {
     if(title.length > 2) {
         addBook();
         navigate('/');
-        
+        setTimeout(() => {
+        setShowModel(false) 
+        setMsg('')
+        }, 2000)
+        setMsg('book created Successfully')
+        setShowModel(true)
     }
  }
 
@@ -84,11 +89,11 @@ const handleSubmit = () => {
         <AdBook>
             <Form onSubmit={e=>e.preventDefault()} >
                 <Label>title</Label>
-                <Input value={title} onChange={e=>setTitle(e.target.value)}  />
+                <Input type='text' value={title} onChange={e=>setTitle(e.target.value)}  />
                 <Label>author</Label>
-                <Input value={author} onChange={e=>setAuthor(e.target.value)}   />
+                <Input type='text' value={author} onChange={e=>setAuthor(e.target.value)}   />
                 <Label>publish year</Label>
-                <Input value={publishYear} onChange={e=>setPublishYear(e.target.value)}   />
+                <Input type='number' value={publishYear} onChange={e=>setPublishYear(e.target.value)}   />
                <Button onClick={handleSubmit}>Add Book</Button>
             </Form>
         </AdBook>

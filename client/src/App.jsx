@@ -4,9 +4,11 @@ import Home from './Components/Home'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import axios from 'axios'
-import { BrowserRouter as Router , Routes,Route, useNavigate } from 'react-router-dom'
+import { BrowserRouter as Router , Routes,Route } from 'react-router-dom'
 import EditBook from './Pages/EditBook'
 import AddBook from './Pages/AddBook'
+import DeleteBook from './Pages/DeleteBook'
+import Model from './Components/Model'
 
 
 const App = () => {
@@ -17,10 +19,13 @@ const App = () => {
   const [data , setData] = useState([])
   const [title , setTitle] = useState('')
   const [author , setAuthor] = useState('')
+  const  [showModel,setShowModel ] = useState(false)
+  const  [msg,setMsg ] = useState('')
 
   const [publishYear , setPublishYear] = useState('')
   
   
+
   const fetchBooks = async () => {
       try {
         const resp =  await axios.get(API_URL + 'all' , {
@@ -35,7 +40,8 @@ const App = () => {
   useEffect(()=>{
       fetchBooks()
   },[data])
-  
+
+
 const addBook = async () => {
   try {
       await axios.post(API_URL + '/post' , {
@@ -49,6 +55,18 @@ const addBook = async () => {
   }
 }
 
+const addImage = async () => {
+  try {
+      await axios.post(API_URL + '/post' , {
+      method : 'POST' ,
+      title : title,
+      author : author ,
+      publishYear : publishYear ,
+    })
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 
  const deleteBook = async (id) => {
@@ -63,7 +81,7 @@ const addBook = async () => {
 
  const updateBook = async(id) => {
   try {
-    const resp =  await axios.patch(API_URL + '/update/' + id , {
+       await axios.patch(API_URL + '/update/' + id , {
       method : 'PATCH',
       title : title,
       author:author ,
@@ -78,10 +96,12 @@ const addBook = async () => {
   return (
     <Router>
       <GlobalStyleApp />
+      <Model showModel={showModel} msg={msg} />
       <Routes>
         <Route path='/' element={< Home data={data} deleteBook={deleteBook}/>} />
-        <Route path='/addbook' element={<AddBook  addBook={addBook} title={title} author={author} publishYear={publishYear}  setTitle={setTitle} setAuthor={setAuthor} setPublishYear={setPublishYear} />} />
-        <Route path='/editbook/:id' element={<EditBook data={data} updateBook={updateBook} addBook={addBook} title={title} author={author} publishYear={publishYear}  setTitle={setTitle} setAuthor={setAuthor} setPublishYear={setPublishYear} />} />
+        <Route path='/addbook' element={<AddBook setMsg={setMsg} setShowModel={setShowModel} addBook={addBook} title={title} author={author} publishYear={publishYear}  setTitle={setTitle} setAuthor={setAuthor} setPublishYear={setPublishYear} />} />
+        <Route path='/editbook/:id' element={<EditBook setMsg={setMsg} setShowModel={setShowModel} data={data} updateBook={updateBook} addBook={addBook} title={title} author={author} publishYear={publishYear}  setTitle={setTitle} setAuthor={setAuthor} setPublishYear={setPublishYear} />} />
+        <Route path='/deletebook/:id' element={<DeleteBook setMsg={setMsg} setShowModel={setShowModel} data={data}  deleteBook={deleteBook} addBook={addBook} title={title} author={author} publishYear={publishYear}  setTitle={setTitle} setAuthor={setAuthor} setPublishYear={setPublishYear} />} />
       </Routes> 
     </Router>
   )

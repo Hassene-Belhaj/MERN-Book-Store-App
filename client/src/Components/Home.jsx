@@ -31,6 +31,9 @@ const Title = styled.h2`
 display: flex;
 justify-content: center;
 margin: 2rem auto;
+color:#0f766e;
+font-size: 2rem;
+font-weight: 800;
 `
 
 const Edit = styled.div`
@@ -92,7 +95,7 @@ const Home = ({data,deleteBook}) => {
             <Title>Book List</Title>
              <Plus>
               <Link to={'/addbook'}>
-                  <IconPlus size={35} color='green'/>
+                  <IconPlus size={25} color='#0d9488'/>
               </Link>
             
              </Plus>
@@ -121,7 +124,9 @@ const Home = ({data,deleteBook}) => {
                           <Link to={`/editbook/${_id}`}>
                             <IconEdit size='20' color='green'  />
                          </Link>
-                            <IconTrash onClick={()=>deleteBook(_id)} size='20' color='red' />
+                          <Link to={`/deletebook/${_id}`}>
+                            <IconTrash size='20' color='red' />                         
+                          </Link>
                           </Icons>
                         </Edit>
                         </Td>
