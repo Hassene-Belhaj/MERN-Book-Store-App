@@ -1,5 +1,5 @@
 const Book = require('../Models/bookModel');
-
+const cloudinary = require('../cloudinary');
 
 const uploadImage = async(req, res)=> {
     try {    
@@ -17,7 +17,7 @@ const uploadImage = async(req, res)=> {
 const getAllBooks = async (req , res) => {
  try {
   const resp = await Book.find({})
-  res.status(200).json({data : resp}) 
+  res.status(200).json({success : true , data : resp}) 
 } catch (error) {
     res.status(500).json({err : error})
 
@@ -31,7 +31,7 @@ const getSingleBook = async (req ,res) => {
         if(!resp) {
             return res.status(404).json({error : 'data can not be found'})
         }
-        res.status(200).json({data : resp})
+        res.status(200).json({success : true , data : resp})
 
     } catch (error) {
        res.status(500).json({err : error})
@@ -39,12 +39,19 @@ const getSingleBook = async (req ,res) => {
 }
 
 const postBook = async (req , res) => {
-      const {title , author , publishYear} = req.body
+      const {title , author , publishYear,image} = req.body
     try {
+        // const result = await cloudinary.uploader.upload(image , {
+        //     folder : "images"
+        // })
         const resp = await Book.create({
-            title , author , publishYear
+            title , author , publishYear ,
+            // image : {
+            //     public_id : result.public_id,
+            //     url : result.secure_url ,
+            // }
         })
-        res.status(201).json({response : resp})
+        res.status(201).json({success : true , response : resp})
     } catch (error) {
         res.status(500).json({err : error})
     }
@@ -57,7 +64,7 @@ const deleteBook = async (req, res) => {
       if(!resp) {
         return res.status(404).json({error : 'Book does not exist'})
       }
-      res.status(200).json({data : resp})    
+      res.status(200).json({success : true , data : resp})    
     } catch (error) {
         res.status(500).json({err : error})
     }
@@ -70,7 +77,7 @@ const updateBook = async (req ,res) => {
         new : true ,
         runValidators : true,
     } )
-    res.status(200).json({data : resp})
+    res.status(200).json({succes : true , data : resp})
    } catch (error) {
     res.status(500).json({err : error})
    }

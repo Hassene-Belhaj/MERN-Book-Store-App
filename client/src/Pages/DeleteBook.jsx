@@ -66,12 +66,6 @@ const DeleteBook = ({setMsg,setShowModel,data,deleteBook}) => {
     const handleSubmit = (id) => {
             deleteBook(id);
             navigate('/');
-            setTimeout(() => {
-            setShowModel(false) 
-            setMsg('')
-            }, 2000)
-            setMsg('book deleted Successfully')
-            setShowModel(true)
      }
 
   return (

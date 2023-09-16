@@ -7,7 +7,6 @@ const { getAllBooks, postBook, deleteBook, getSingleBook, updateBook, uploadImag
 // router.get('/' , getAllBooks)
 // router.post('/post',postBook)
 
-router.route('/upload-image').post(uploadImage)
 router.route('/all').get(getAllBooks)
 router.route('/single/:id').get(getSingleBook)
 router.route('/post').post(postBook)

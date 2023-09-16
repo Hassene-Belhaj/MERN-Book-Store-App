@@ -63,20 +63,32 @@ cursor: pointer;
 
 
 
-const AddBook = ({setMsg,addBook,title,author,publishYear,setTitle,setAuthor,setPublishYear,setShowModel}) => {
+const AddBook = ({setFile,setMsg,addBook,title,author,publishYear,setTitle,setAuthor,setPublishYear,setShowModel}) => {
+      
 
-const navigate = useNavigate()
+    const navigate = useNavigate()
+
+    const handleImage = (e) =>{
+        const file = e.target.files[0];
+        setFileToBase(file);
+        console.log(file);
+    }
+    
+    const setFileToBase = (file) =>{
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () =>{
+            setFile(reader.result);
+        }
+    
+    }
+      
+
 
 const handleSubmit = () => {
     if(title.length > 2) {
         addBook();
         navigate('/');
-        setTimeout(() => {
-        setShowModel(false) 
-        setMsg('')
-        }, 2000)
-        setMsg('book created Successfully')
-        setShowModel(true)
     }
  }
 
@@ -94,6 +106,8 @@ const handleSubmit = () => {
                 <Input type='text' value={author} onChange={e=>setAuthor(e.target.value)}   />
                 <Label>publish year</Label>
                 <Input type='number' value={publishYear} onChange={e=>setPublishYear(e.target.value)}   />
+                <Label>Select File</Label>
+                <Input type='file'  onChange={handleImage}/>
                <Button onClick={handleSubmit}>Add Book</Button>
             </Form>
         </AdBook>

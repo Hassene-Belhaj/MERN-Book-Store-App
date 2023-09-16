@@ -21,10 +21,10 @@ const App = () => {
   const [author , setAuthor] = useState('')
   const  [showModel,setShowModel ] = useState(false)
   const  [msg,setMsg ] = useState('')
+  const [file ,setFile] = useState([])
 
   const [publishYear , setPublishYear] = useState('')
-  
-  
+
 
   const fetchBooks = async () => {
       try {
@@ -49,31 +49,37 @@ const addBook = async () => {
       title : title,
       author : author ,
       publishYear : publishYear ,
+      image : file,
     })
+    if(resp.data.success === true) {
+      setTimeout(() => {
+        setShowModel(false) 
+        setMsg('')
+      }, 2000)
+        setMsg('book added Successfully')
+        setShowModel(true)
+      }  
   } catch (error) {
     console.log(error);
   }
 }
 
-const addImage = async () => {
-  try {
-      await axios.post(API_URL + '/post' , {
-      method : 'POST' ,
-      title : title,
-      author : author ,
-      publishYear : publishYear ,
-    })
-  } catch (error) {
-    console.log(error);
-  }
-}
 
 
  const deleteBook = async (id) => {
   try {
-    await axios.delete(API_URL + '/delete/' + id , {
+    const resp =  await axios.delete(API_URL + '/delete/' + id , {
     method : 'DELETE' ,
   })
+    if(resp.data.success === true) {
+    setTimeout(() => {
+      setShowModel(false) 
+      setMsg('')
+    }, 2000)
+      setMsg('book deleted Successfully')
+      setShowModel(true)
+    }
+   
   } catch (error) {
     console.log(error);
   }
@@ -81,12 +87,21 @@ const addImage = async () => {
 
  const updateBook = async(id) => {
   try {
-       await axios.patch(API_URL + '/update/' + id , {
+    const resp = await axios.patch(API_URL + '/update/' + id , {
       method : 'PATCH',
       title : title,
       author:author ,
       publishYear : publishYear,
     })
+    if(resp.data.success === true) {
+      setTimeout(() => {
+        setShowModel(false) 
+        setMsg('')
+      }, 2000)
+        setMsg('book updated Successfully')
+        setShowModel(true)
+      }
+     
     
   } catch (error) {
     console.log(error);
@@ -99,7 +114,7 @@ const addImage = async () => {
       <Model showModel={showModel} msg={msg} />
       <Routes>
         <Route path='/' element={< Home data={data} deleteBook={deleteBook}/>} />
-        <Route path='/addbook' element={<AddBook setMsg={setMsg} setShowModel={setShowModel} addBook={addBook} title={title} author={author} publishYear={publishYear}  setTitle={setTitle} setAuthor={setAuthor} setPublishYear={setPublishYear} />} />
+        <Route path='/addbook' element={<AddBook file={file} setFile={setFile} setMsg={setMsg} setShowModel={setShowModel} addBook={addBook} title={title} author={author} publishYear={publishYear}  setTitle={setTitle} setAuthor={setAuthor} setPublishYear={setPublishYear} />} />
         <Route path='/editbook/:id' element={<EditBook setMsg={setMsg} setShowModel={setShowModel} data={data} updateBook={updateBook} addBook={addBook} title={title} author={author} publishYear={publishYear}  setTitle={setTitle} setAuthor={setAuthor} setPublishYear={setPublishYear} />} />
         <Route path='/deletebook/:id' element={<DeleteBook setMsg={setMsg} setShowModel={setShowModel} data={data}  deleteBook={deleteBook} addBook={addBook} title={title} author={author} publishYear={publishYear}  setTitle={setTitle} setAuthor={setAuthor} setPublishYear={setPublishYear} />} />
       </Routes> 

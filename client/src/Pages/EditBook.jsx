@@ -85,12 +85,6 @@ useEffect(()=>{
 const handleSubmit = (id) => {
   updateBook(id);
   navigate('/');
-  setTimeout(() => {
-  setShowModel(false) 
-  setMsg('')
-  }, 2000)
-  setMsg('book updated Successfully')
-  setShowModel(true)
 }
 
 
