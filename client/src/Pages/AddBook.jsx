@@ -6,7 +6,6 @@ import styled from 'styled-components'
 const Container = styled.div`
 height: 100vh;
 text-transform: capitalize;
-background-color: #f3f5f9;
 `
 
 const Title = styled.h2`
@@ -15,18 +14,18 @@ padding: .5rem 0;
 `
 
 const AdBook = styled.div`
-max-width: 600px;
-padding: 2rem;
+max-width: 700px;
+padding: 1rem;
 border: 2px solid rgba(0,0,0,0.2);
 border-radius: 10px;
-margin: 5rem auto;
+margin: 1rem auto;
 background-color: #fff;
 `
 const Form = styled.form`
 display: flex;
 flex-direction: column;
 justify-content: center;
-gap: 1rem;
+gap: .5rem;
 `
 
 
@@ -47,7 +46,7 @@ transition: all ease-in-out 0.4s;
 `
 
 const Button = styled.button`
-margin: 5rem 0;
+margin: 1rem 0;
 width: 100%;
 padding:.8rem 0 ;
 background-color: #000;
@@ -60,28 +59,38 @@ cursor: pointer;
     opacity : 0.9 ;
 }
 `
+const ImageDiv = styled.div`
+height: 100%;
+width: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+`
+const Image = styled.img`
+margin: 2rem;
+max-width: 350px;
+max-height: 350px;
+`
 
-
-
-const AddBook = ({setFile,setMsg,addBook,title,author,publishYear,setTitle,setAuthor,setPublishYear,setShowModel}) => {
-      
-
+const AddBook = ({file,setFile,addBook,title,author,publishYear,setTitle,setAuthor,setPublishYear}) => {
+        
+    
     const navigate = useNavigate()
 
-    const handleImage = (e) =>{
-        const file = e.target.files[0];
-        setFileToBase(file);
-        console.log(file);
-    }
+    // const handleImage = (e) =>{
+    //     const file = e.target.files[0];
+    //     transformFile(file);
+    //     console.log(file);
+    // }
     
-    const setFileToBase = (file) =>{
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = () =>{
-            setFile(reader.result);
-        }
+    // const transformFile = (file) =>{
+    //     const reader = new FileReader();
+    //     reader.readAsDataURL(file);
+    //     reader.onloadend = () =>{
+    //         setFile(reader.result);
+    //     }
     
-    }
+    // }
       
 
 
@@ -101,13 +110,17 @@ const handleSubmit = () => {
         <AdBook>
             <Form onSubmit={e=>e.preventDefault()} >
                 <Label>title</Label>
-                <Input type='text' value={title} onChange={e=>setTitle(e.target.value)}  />
+                <Input type='text' value={title} onChange={e=>setTitle(e.target.value)} placeholder='Title' />
                 <Label>author</Label>
-                <Input type='text' value={author} onChange={e=>setAuthor(e.target.value)}   />
+                <Input type='text' value={author} onChange={e=>setAuthor(e.target.value)} placeholder='Author'  />
                 <Label>publish year</Label>
-                <Input type='number' value={publishYear} onChange={e=>setPublishYear(e.target.value)}   />
-                <Label>Select File</Label>
-                <Input type='file'  onChange={handleImage}/>
+                <Input type='number' value={publishYear} onChange={e=>setPublishYear(e.target.value)} placeholder='Published Year'  />
+                <Label>image url</Label>
+                <Input type='text' value={file} onChange={e=>setFile(e.target.value)}  placeholder='Image url' />
+             
+
+                 
+                
                <Button onClick={handleSubmit}>Add Book</Button>
             </Form>
         </AdBook>

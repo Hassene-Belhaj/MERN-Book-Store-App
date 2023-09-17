@@ -1,17 +1,7 @@
 const Book = require('../Models/bookModel');
-const cloudinary = require('../cloudinary');
+// const cloudinary = require('../cloudinary');
 
-const uploadImage = async(req, res)=> {
-    try {    
-    const {image} = req.body    
-    const resp = await Book.create({
-        image : image
-    })  
-    res.status(201).json({image : resp})  
-    } catch (error) {
-        res.status(500).json({err : error})
-    }
-}
+
 
 
 const getAllBooks = async (req , res) => {
@@ -41,15 +31,9 @@ const getSingleBook = async (req ,res) => {
 const postBook = async (req , res) => {
       const {title , author , publishYear,image} = req.body
     try {
-        // const result = await cloudinary.uploader.upload(image , {
-        //     folder : "images"
-        // })
-        const resp = await Book.create({
-            title , author , publishYear ,
-            // image : {
-            //     public_id : result.public_id,
-            //     url : result.secure_url ,
-            // }
+            
+         const resp = await Book.create({
+            title , author , publishYear , image
         })
         res.status(201).json({success : true , response : resp})
     } catch (error) {
@@ -77,12 +61,12 @@ const updateBook = async (req ,res) => {
         new : true ,
         runValidators : true,
     } )
-    res.status(200).json({succes : true , data : resp})
+    res.status(200).json({success : true , data : resp})
    } catch (error) {
     res.status(500).json({err : error})
    }
 }
 
 module.exports = {
-    getAllBooks,getSingleBook,postBook,deleteBook,updateBook,uploadImage
+    getAllBooks,getSingleBook,postBook,deleteBook,updateBook
 };

@@ -9,9 +9,10 @@
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
     
- }
- body {
-    scroll-behavior: smooth;
+   }
+   body {
+      scroll-behavior: smooth;
+      background-color: #f3f5f9;
  }
  
  `

@@ -48,7 +48,7 @@ transition: all ease-in-out 0.4s;
 
 
 const Button = styled.button`
-margin: 5rem 0;
+margin: 1rem 0;
 width: 100%;
 padding:.8rem 0 ;
 background-color: #000;
@@ -64,7 +64,7 @@ cursor: pointer;
 
 
 
-const EditBook = ({setMsg,setShowModel,updateBook,data,title,author,publishYear,setTitle,setAuthor,setPublishYear}) => {
+const EditBook = ({setMsg,setShowModel,file,setFile,updateBook,data,title,author,publishYear,setTitle,setAuthor,setPublishYear}) => {
 
   const {id} =  useParams()
 
@@ -76,6 +76,7 @@ useEffect(()=>{
     setTitle(findBook?.title);
     setAuthor(findBook?.author);
     setPublishYear(findBook?.publishYear);
+    setFile(findBook?.image)
 },[])
 
 
@@ -100,9 +101,11 @@ const handleSubmit = (id) => {
                 <Label>title</Label>
                 <Input type='text' value={title} onChange={e=>setTitle(e.target.value)}  />
                 <Label>author</Label>
-                <Input type='text' value={author} onChange={e=>setAuthor(e.target.value)}   />
+                <Input type='text' value={author} onChange={e=>setAuthor(e.target.value)}  />
                 <Label>publish year</Label>
-                <Input type='number' value={publishYear} onChange={e=>setPublishYear(e.target.value)}   />
+                <Input type='number' value={publishYear} onChange={e=>setPublishYear(e.target.value)}  />
+                <Label>image url</Label>
+                <Input type='text' value={file} onChange={e=>setFile(e.target.value)} />
                <Button onClick={()=>handleSubmit(findBook?._id)}>update Book</Button>
             </Form>
         </AdBook>

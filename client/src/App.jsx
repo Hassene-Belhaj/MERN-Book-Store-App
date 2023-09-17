@@ -26,6 +26,7 @@ const App = () => {
   const [publishYear , setPublishYear] = useState('')
 
 
+
   const fetchBooks = async () => {
       try {
         const resp =  await axios.get(API_URL + 'all' , {
@@ -44,7 +45,7 @@ const App = () => {
 
 const addBook = async () => {
   try {
-      await axios.post(API_URL + '/post' , {
+     const resp =  await axios.post(API_URL + '/post' , {
       method : 'POST' ,
       title : title,
       author : author ,
@@ -55,7 +56,7 @@ const addBook = async () => {
       setTimeout(() => {
         setShowModel(false) 
         setMsg('')
-      }, 2000)
+      }, 3000)
         setMsg('book added Successfully')
         setShowModel(true)
       }  
@@ -75,7 +76,7 @@ const addBook = async () => {
     setTimeout(() => {
       setShowModel(false) 
       setMsg('')
-    }, 2000)
+    }, 3000)
       setMsg('book deleted Successfully')
       setShowModel(true)
     }
@@ -93,16 +94,14 @@ const addBook = async () => {
       author:author ,
       publishYear : publishYear,
     })
-    if(resp.data.success === true) {
+     if(resp.data.success === true) {
       setTimeout(() => {
         setShowModel(false) 
         setMsg('')
-      }, 2000)
+      },3000)
         setMsg('book updated Successfully')
         setShowModel(true)
       }
-     
-    
   } catch (error) {
     console.log(error);
   }
@@ -115,7 +114,7 @@ const addBook = async () => {
       <Routes>
         <Route path='/' element={< Home data={data} deleteBook={deleteBook}/>} />
         <Route path='/addbook' element={<AddBook file={file} setFile={setFile} setMsg={setMsg} setShowModel={setShowModel} addBook={addBook} title={title} author={author} publishYear={publishYear}  setTitle={setTitle} setAuthor={setAuthor} setPublishYear={setPublishYear} />} />
-        <Route path='/editbook/:id' element={<EditBook setMsg={setMsg} setShowModel={setShowModel} data={data} updateBook={updateBook} addBook={addBook} title={title} author={author} publishYear={publishYear}  setTitle={setTitle} setAuthor={setAuthor} setPublishYear={setPublishYear} />} />
+        <Route path='/editbook/:id' element={<EditBook file={file} setFile={setFile} setMsg={setMsg}  setShowModel={setShowModel} data={data} updateBook={updateBook} addBook={addBook} title={title} author={author} publishYear={publishYear}  setTitle={setTitle} setAuthor={setAuthor} setPublishYear={setPublishYear} />} />
         <Route path='/deletebook/:id' element={<DeleteBook setMsg={setMsg} setShowModel={setShowModel} data={data}  deleteBook={deleteBook} addBook={addBook} title={title} author={author} publishYear={publishYear}  setTitle={setTitle} setAuthor={setAuthor} setPublishYear={setPublishYear} />} />
       </Routes> 
     </Router>

@@ -12,14 +12,14 @@ text-transform: capitalize;
 `
 const BookContainer = styled.div`
 text-align: center;
-padding-top: 2rem ;
+padding-bottom: 4rem ;
 `
 
 const Plus = styled.div`
 width: 90%;
 display: flex;
 justify-content: end;
-margin: 2rem auto;
+margin: .5rem auto;
 `
 
 const IconPlus = styled(AiOutlinePlusSquare)`
@@ -32,7 +32,7 @@ display: flex;
 justify-content: center;
 margin: 2rem auto;
 color:#0f766e;
-font-size: 2rem;
+font-size: 1.5rem;
 font-weight: 800;
 `
 
@@ -77,20 +77,22 @@ height: 3rem;
 
 const Th = styled.th`
 text-transform: capitalize;
-font-size: 1.2rem;
+font-size: 1rem;
 font-weight: 800;
 /* border : 3px solid rgba(0,0,0,0.7) ; */
 `
 
 const Td = styled.td`
+font-size: 1rem;
+font-weight: 500;
 `
 
 
-const Home = ({data,deleteBook}) => {
+const Home = ({data}) => {
 
   return (
     <Container>
-           <AiOutlineHome style={{marginLeft : '5rem' , marginTop:'2rem' , cursor:'pointer'}} size={25} />
+           <AiOutlineHome style={{marginLeft : '3rem' , marginTop:'2rem' , cursor:'pointer'}} size={25} />
         <BookContainer>
             <Title>Book List</Title>
              <Plus>
@@ -103,17 +105,22 @@ const Home = ({data,deleteBook}) => {
               <Thead>
                 <Tr>
                   <Th>no</Th>
+                  <Th>book</Th>
                   <Th>title</Th>
                   <Th>author</Th>
                   <Th>published Year</Th>
                   <Th>Operations</Th>
                 </Tr>
               </Thead>
-            {data.map(({_id,title,author,publishYear},index)=> {
+            {data.map(({_id,title,author,publishYear,image},index)=> {
               return (
                 <Tbody key={_id}>
                   <Tr >
                       <Td>{index+1}</Td>
+                      <Td>
+                        <img src={image} style={{width:'100px'}} />
+
+                      </Td>
                       <Td>{title}</Td>
                       <Td>{author}</Td>
                       <Td>{publishYear}</Td>

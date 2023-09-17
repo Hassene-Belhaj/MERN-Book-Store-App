@@ -33,7 +33,7 @@ const Button = styled.button`
 display: flex;
 justify-content: center;
 margin: 2rem auto;
-width: 80%;
+width: 90%;
 padding:.8rem 0 ;
 background-color: ${({$bg})=>$bg};
 color: ${({color})=>color};

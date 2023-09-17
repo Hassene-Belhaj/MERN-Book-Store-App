@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router()
-const { getAllBooks, postBook, deleteBook, getSingleBook, updateBook, uploadImage } = require('../Controllers/route');
+const { getAllBooks, postBook, deleteBook, getSingleBook, updateBook } = require('../Controllers/route');
 
 
 
