@@ -56,13 +56,14 @@ const addBook = async () => {
       publishYear : publishYear ,
       image : file,
     })
+   
     if(resp.data.success === true) {
       setTimeout(() => {
         setShowModel(false) 
         setMsg('')
       }, 3000)
         setMsg('book added Successfully')
-        setShowModel(true)
+        setShowModel(true)  
       }  
   } catch (error) {
     console.log(error);

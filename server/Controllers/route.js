@@ -1,4 +1,5 @@
 const Book = require('../Models/bookModel');
+const { AsyncWrapp } = require('../middleWares/AsyncWrapp');
 // const cloudinary = require('../cloudinary');
 
 
@@ -14,8 +15,7 @@ const getAllBooks = async (req , res) => {
  }
 }
 
-const getSingleBook = async (req ,res) => {
-    try {
+const getSingleBook = AsyncWrapp( async (req ,res) => {
         const {id} = req.params
         const resp = await Book.findOne({_id : id})
         if(!resp) {
@@ -23,38 +23,33 @@ const getSingleBook = async (req ,res) => {
         }
         res.status(200).json({success : true , data : resp})
 
-    } catch (error) {
        res.status(500).json({err : error})
-    }
-}
+    
+})
 
-const postBook = async (req , res) => {
+const postBook = AsyncWrapp( async (req , res) => {
       const {title , author ,desc, publishYear,image} = req.body
-    try {
-            
-         const resp = await Book.create({
-            title , author ,desc, publishYear , image
-        })
-        res.status(201).json({success : true , response : resp})
-    } catch (error) {
-        res.status(500).json({err : error})
-    }
-}
+        
+        const resp = await Book.create({
+        title , author ,desc, publishYear , image
+      })
+       res.status(201).json({success : true , response : resp})
 
-const deleteBook = async (req, res) => {
-     const {id} = req.params
-    try {
-      const resp = await Book.findOneAndDelete({_id : id})  
-      if(!resp) {
-        return res.status(404).json({error : 'Book does not exist'})
-      }
-      res.status(200).json({success : true , data : resp})    
-    } catch (error) {
-        res.status(500).json({err : error})
-    }
-}
+       res.status(500).json({err : error})
+    
+})
 
-const updateBook = async (req ,res) => {
+const deleteBook = AsyncWrapp(async (req, res) => {
+    const {id} = req.params
+    const resp = await Book.findOneAndDelete({_id : id})  
+    if(!resp) {
+    return res.status(404).json({error : 'Book does not exist'})
+    }
+    res.status(200).json({success : true , data : resp})    
+    res.status(500).json({err : error})
+})
+
+const updateBook = AsyncWrapp(async (req ,res) => {
    const {id} = req.params
    try {
     const resp = await Book.findOneAndUpdate({_id : id} , req.body , {
@@ -65,7 +60,7 @@ const updateBook = async (req ,res) => {
    } catch (error) {
     res.status(500).json({err : error})
    }
-}
+})
 
 module.exports = {
     getAllBooks,getSingleBook,postBook,deleteBook,updateBook

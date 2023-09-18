@@ -2,7 +2,8 @@ const express = require('express');
 const connectDB = require('./Config/DB')
 require('dotenv').config();
 const cors = require('cors');
-const router = require('./Routes/routes')
+const router = require('./Routes/routes');
+const { NotFound } = require('./middleWares/NotFound');
 
 
 const app = express()
@@ -23,3 +24,4 @@ const Start =async () => {
 Start()
 
 app.use('/api/v1/books' , router)
+app.use(NotFound)

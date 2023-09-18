@@ -6,7 +6,7 @@ import { AiFillCheckCircle } from 'react-icons/ai'
 const ModelContainer = styled.div`
 position: absolute;
 bottom: 5px;
-left: ${({$showModel})=>$showModel ? '2rem' : '-100%'};
+left: ${({$showModel})=>$showModel ? '1px' : '-150%'};
 transition: all ease-in-out 0.5s;
 width: 20rem ;
 height : 3rem ;
@@ -27,18 +27,14 @@ const Title = styled.h4`
 
 const Model = ({showModel,msg}) => {
 
-  
 
   return (
-    <>
         <ModelContainer $showModel={showModel}>
             <Message>
                 <AiFillCheckCircle  style={{marginRight:'1rem'}} color='#fff' size={20}/>
-                 <Title>{msg}</Title>
-                
+                 <Title>{msg}</Title>             
             </Message>
         </ModelContainer>
-    </>
   )
 }
 

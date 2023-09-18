@@ -11,12 +11,7 @@ height: 100vh;
 background-color: #f3f5f9;
 text-transform: capitalize;
 `
-const ContainerRGBA = styled.div`
-position: fixed;
-inset: 0;
-display: ${({$showModelInformation})=>$showModelInformation? 'flex' : 'none'};
-background-color: rgba(0,0,0,0.5);
-`
+
 
 const BookContainer = styled.div`
 text-align: center;
@@ -41,6 +36,7 @@ padding: 3rem auto;
 color:#0f766e;
 font-size: 1.5rem;
 font-weight: 800;
+margin: 1rem 0;
 `
 
 const AddBookTop = styled.div`
@@ -59,12 +55,12 @@ const Icons = styled.div`
 
 `
 const IconI = styled(HiOutlineInformationCircle)`
-margin-right: 1rem;
+margin-right: .5rem;
 cursor: pointer;
 `
 
 const IconEdit = styled(AiOutlineEdit)`
-margin-right: 1rem;
+margin-right: .5rem;
 cursor: pointer;
 `
 
@@ -88,12 +84,12 @@ const Tbody = styled.tbody`
 const Tr = styled.tr`
 height: 3rem;
 `
+const Image = styled.img``
 
 const Th = styled.th`
 text-transform: capitalize;
 font-size: 1rem;
 font-weight: 800;
-/* border : 3px solid rgba(0,0,0,0.7) ; */
 `
 
 const Td = styled.td`
@@ -112,7 +108,6 @@ const Home = ({setParamID, data , showModelInformation , setShowModelInformation
 
   return (
     <Container>
-            <ContainerRGBA $showModelInformation={showModelInformation} ></ContainerRGBA>
            {/* <AiOutlineHome style={{marginLeft : '3rem' , marginTop:'2rem' , cursor:'pointer'}} size={25} /> */}
         <BookContainer>
             <Title>Book List</Title>
@@ -142,7 +137,7 @@ const Home = ({setParamID, data , showModelInformation , setShowModelInformation
                   <Tr >
                       <Td>{index+1}</Td>
                       <Td>
-                        <img src={image} style={{width:'100px'}} />
+                        <Image src={image} style={{width:'60px'}} />
 
                       </Td>
                       <Td>{title}</Td>

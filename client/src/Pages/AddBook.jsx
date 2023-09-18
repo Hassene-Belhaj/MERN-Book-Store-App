@@ -1,6 +1,7 @@
 import React from 'react'
+import { useEffect } from 'react'
 import { AiOutlineHome } from 'react-icons/ai'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -78,7 +79,18 @@ cursor: pointer;
 
 const AddBook = ({file,setFile,addBook,title,author,desc,setDesc,publishYear,setTitle,setAuthor,setPublishYear}) => {
         
-    
+const location = useLocation()
+
+
+useEffect(()=>{
+    setTitle('')
+    setAuthor('')
+    setDesc('')
+    setPublishYear('')
+    setFile('')
+},[location.pathname])    
+
+
     const navigate = useNavigate()
 
     // const handleImage = (e) =>{

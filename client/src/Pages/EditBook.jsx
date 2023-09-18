@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Container = styled.div`
-height: 100vh;
+height: 100%;
 text-transform: capitalize;
 background-color: #f3f5f9;
 `
@@ -19,7 +19,7 @@ max-width: 600px;
 padding: 2rem;
 border: 2px solid rgba(0,0,0,0.2);
 border-radius: 10px;
-margin: 5rem auto;
+margin: 2rem auto;
 background-color: #fff;
 `
 const Form = styled.form`
@@ -46,7 +46,7 @@ transition: all ease-in-out 0.4s;
 }
 `
 const Textarea = styled.textarea`
-height: 10rem;
+height: 8rem;
 padding: .5rem .5rem;
 font-size: 1rem;
 border-radius: 5px;
