@@ -45,8 +45,18 @@ transition: all ease-in-out 0.4s;
     border: 2px solid rgba(0,0,0,0.8);
 }
 `
-
-
+const Textarea = styled.textarea`
+height: 10rem;
+padding: .5rem .5rem;
+font-size: 1rem;
+border-radius: 5px;
+outline: none;
+border: 2px solid rgba(0,0,0,0.2);
+transition: all ease-in-out 0.4s;
+&:focus{
+    border: 2px solid rgba(0,0,0,0.8);
+}
+`
 const Button = styled.button`
 margin: 1rem 0;
 width: 100%;
@@ -64,7 +74,7 @@ cursor: pointer;
 
 
 
-const EditBook = ({setMsg,setShowModel,file,setFile,updateBook,data,title,author,publishYear,setTitle,setAuthor,setPublishYear}) => {
+const EditBook = ({file,setFile,updateBook,data,title,author,desc,setDesc,publishYear,setTitle,setAuthor,setPublishYear}) => {
 
   const {id} =  useParams()
 
@@ -75,6 +85,7 @@ const EditBook = ({setMsg,setShowModel,file,setFile,updateBook,data,title,author
 useEffect(()=>{
     setTitle(findBook?.title);
     setAuthor(findBook?.author);
+    setDesc(findBook?.desc);
     setPublishYear(findBook?.publishYear);
     setFile(findBook?.image)
 },[])
@@ -102,6 +113,8 @@ const handleSubmit = (id) => {
                 <Input type='text' value={title} onChange={e=>setTitle(e.target.value)}  />
                 <Label>author</Label>
                 <Input type='text' value={author} onChange={e=>setAuthor(e.target.value)}  />
+                <Label>description</Label>
+                <Textarea type='text' value={desc} onChange={e=>setDesc(e.target.value)}  />
                 <Label>publish year</Label>
                 <Input type='number' value={publishYear} onChange={e=>setPublishYear(e.target.value)}  />
                 <Label>image url</Label>

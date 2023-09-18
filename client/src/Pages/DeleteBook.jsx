@@ -25,6 +25,7 @@ margin: auto;
 const Title = styled.p`
 text-align: center;
 padding: 2rem 0;
+line-height: 2rem;
 `
 
 
@@ -48,9 +49,9 @@ text-transform: capitalize;
 }
 `
 const Span = styled.span`
+font-size: 1.1rem;
 font-weight: 800;
 text-transform: capitalize;
-border-bottom: 2px solid #000;
 border-spacing: 4px;
 `
 
@@ -72,7 +73,7 @@ const DeleteBook = ({setMsg,setShowModel,data,deleteBook}) => {
     <Container>
         <AdBook>
             <Title>
-                 Are you sure you want to delete <Span> {findBook?.title} by {findBook?.author} </Span> book ?   
+                 Are you sure you want to delete <br/> <Span> {findBook?.title} by {findBook?.author} </Span> <br/>book ?   
             </Title>
             <Button onClick={()=>handleSubmit(id)} $bg='#000' color='#fff'>yes</Button>
             <Button onClick={()=>navigate('/')} $bg='#fff' color='#000'>no</Button>

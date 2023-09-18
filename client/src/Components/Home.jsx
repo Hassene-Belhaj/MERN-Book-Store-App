@@ -6,10 +6,18 @@ import { FiTrash } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 
 const Container = styled.div`
+width: 100%;
 height: 100vh;
 background-color: #f3f5f9;
 text-transform: capitalize;
 `
+const ContainerRGBA = styled.div`
+position: fixed;
+inset: 0;
+display: ${({$showModelInformation})=>$showModelInformation? 'flex' : 'none'};
+background-color: rgba(0,0,0,0.5);
+`
+
 const BookContainer = styled.div`
 text-align: center;
 padding-bottom: 4rem ;
@@ -28,12 +36,19 @@ cursor: pointer;
 
 
 const Title = styled.h2`
-display: flex;
-justify-content: center;
-margin: 2rem auto;
+text-align: center;
+padding: 3rem auto;
 color:#0f766e;
 font-size: 1.5rem;
 font-weight: 800;
+`
+
+const AddBookTop = styled.div`
+display: flex;
+margin: 1rem 0;
+`
+const AddBookTitle = styled.h3`
+ margin-right:1rem; 
 `
 
 const Edit = styled.div`
@@ -68,7 +83,6 @@ const Thead = styled.thead`
 `
 
 const Tbody = styled.tbody`
-
 `
 
 const Tr = styled.tr`
@@ -88,16 +102,26 @@ font-weight: 500;
 `
 
 
-const Home = ({data}) => {
+const Home = ({setParamID, data , showModelInformation , setShowModelInformation}) => {
+
+  const handleModal =(id) => {
+    setShowModelInformation(!showModelInformation)
+    setParamID(id)
+  }
+
 
   return (
     <Container>
-           <AiOutlineHome style={{marginLeft : '3rem' , marginTop:'2rem' , cursor:'pointer'}} size={25} />
+            <ContainerRGBA $showModelInformation={showModelInformation} ></ContainerRGBA>
+           {/* <AiOutlineHome style={{marginLeft : '3rem' , marginTop:'2rem' , cursor:'pointer'}} size={25} /> */}
         <BookContainer>
             <Title>Book List</Title>
              <Plus>
-              <Link to={'/addbook'}>
-                  <IconPlus size={25} color='#0d9488'/>
+              <Link to={'/addbook'} style={{textDecoration:'none',color:'#0d9488'}}>
+                 <AddBookTop>
+                    <AddBookTitle>add a new book</AddBookTitle>  
+                    <IconPlus size={25} color='#0d9488'/>
+                 </AddBookTop>
               </Link>
             
              </Plus>
@@ -127,7 +151,7 @@ const Home = ({data}) => {
                         <Td>
                         <Edit>
                           <Icons>
-                            <IconI size='20' color='#0ea5e9' />
+                            <IconI onClick={()=>handleModal(_id)} size='20' color='#0ea5e9' />
                           <Link to={`/editbook/${_id}`}>
                             <IconEdit size='20' color='green'  />
                          </Link>

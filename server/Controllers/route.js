@@ -29,11 +29,11 @@ const getSingleBook = async (req ,res) => {
 }
 
 const postBook = async (req , res) => {
-      const {title , author , publishYear,image} = req.body
+      const {title , author ,desc, publishYear,image} = req.body
     try {
             
          const resp = await Book.create({
-            title , author , publishYear , image
+            title , author ,desc, publishYear , image
         })
         res.status(201).json({success : true , response : resp})
     } catch (error) {

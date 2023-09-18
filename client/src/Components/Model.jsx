@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { AiFillCheckCircle } from 'react-icons/ai'
 
 
 const ModelContainer = styled.div`
 position: absolute;
-bottom: 1rem;
+bottom: 5px;
 left: ${({$showModel})=>$showModel ? '2rem' : '-100%'};
 transition: all ease-in-out 0.5s;
 width: 20rem ;
@@ -26,7 +26,8 @@ const Title = styled.h4`
 `
 
 const Model = ({showModel,msg}) => {
-    
+
+  
 
   return (
     <>

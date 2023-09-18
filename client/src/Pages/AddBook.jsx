@@ -35,7 +35,7 @@ font-weight: 600;
 
 const Input = styled.input`
 padding: .5rem .5rem;
-font-size: 1.2rem;
+font-size: 1rem;
 border-radius: 5px;
 outline: none;
 border: 2px solid rgba(0,0,0,0.2);
@@ -44,6 +44,21 @@ transition: all ease-in-out 0.4s;
     border: 2px solid rgba(0,0,0,0.8);
 }
 `
+
+const Textarea = styled.textarea`
+height: 10rem;
+padding: .5rem .5rem;
+font-size: 1rem;
+border-radius: 5px;
+outline: none;
+border: 2px solid rgba(0,0,0,0.2);
+transition: all ease-in-out 0.4s;
+&:focus{
+    border: 2px solid rgba(0,0,0,0.8);
+}
+
+`
+
 
 const Button = styled.button`
 margin: 1rem 0;
@@ -59,20 +74,9 @@ cursor: pointer;
     opacity : 0.9 ;
 }
 `
-const ImageDiv = styled.div`
-height: 100%;
-width: 100%;
-display: flex;
-justify-content: center;
-align-items: center;
-`
-const Image = styled.img`
-margin: 2rem;
-max-width: 350px;
-max-height: 350px;
-`
 
-const AddBook = ({file,setFile,addBook,title,author,publishYear,setTitle,setAuthor,setPublishYear}) => {
+
+const AddBook = ({file,setFile,addBook,title,author,desc,setDesc,publishYear,setTitle,setAuthor,setPublishYear}) => {
         
     
     const navigate = useNavigate()
@@ -113,6 +117,8 @@ const handleSubmit = () => {
                 <Input type='text' value={title} onChange={e=>setTitle(e.target.value)} placeholder='Title' />
                 <Label>author</Label>
                 <Input type='text' value={author} onChange={e=>setAuthor(e.target.value)} placeholder='Author'  />
+                <Label>description</Label>
+                <Textarea type='text' value={desc} onChange={e=>setDesc(e.target.value)} placeholder='description'  />
                 <Label>publish year</Label>
                 <Input type='number' value={publishYear} onChange={e=>setPublishYear(e.target.value)} placeholder='Published Year'  />
                 <Label>image url</Label>
