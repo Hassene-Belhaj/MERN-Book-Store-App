@@ -98,13 +98,18 @@ font-weight: 500;
 `
 
 
-const Home = ({setParamID, data , showModelInformation , setShowModelInformation}) => {
+const Home = ({setParamID, data , showModelInformation , setShowModelInformation , setShowModelImage ,showModelImage}) => {
 
   const handleModal =(id) => {
     setShowModelInformation(!showModelInformation)
     setParamID(id)
   }
-
+  
+  const handleModelImage =(id) => {
+    setShowModelImage(!showModelImage)
+    setParamID(id)
+  }
+  
 
   return (
     <Container>
@@ -137,7 +142,7 @@ const Home = ({setParamID, data , showModelInformation , setShowModelInformation
                   <Tr >
                       <Td>{index+1}</Td>
                       <Td>
-                        <Image src={image} style={{width:'60px'}} />
+                        <Image onClick={()=>handleModelImage(_id)} src={image} style={{width:'60px'}} />
 
                       </Td>
                       <Td>{title}</Td>

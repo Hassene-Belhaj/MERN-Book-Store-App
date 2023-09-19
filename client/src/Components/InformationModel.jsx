@@ -8,7 +8,7 @@ const Information = styled.div`
 position: absolute;
 top: 50%;
 left: ${({$showModelInformation})=>$showModelInformation ? '50%' : '-150%'};
-transition: all 0.3s ease-in-out;
+transition: all 0.35s ease-in-out;
 transform: translate(-50%,-50%);
 width: 800px;
 height: auto;
@@ -23,7 +23,7 @@ position: fixed;
 inset: 0;
 display: ${({$showModelInformation})=>$showModelInformation? 'flex' : 'none'};
 transition: all 0.3s ease-in-out;
-background-color: rgba(0,0,0,0.5);
+background-color: rgba(0,0,0,0.7);
 cursor: pointer;
 `
 
@@ -58,6 +58,7 @@ margin: 0 1rem;
 `
 
 const InformationModel = ({showModelInformation,setShowModelInformation,data,paramID}) => {
+
    const findBook = data.find((item)=>item._id === paramID )
 
   return (

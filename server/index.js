@@ -4,6 +4,7 @@ require('dotenv').config();
 const cors = require('cors');
 const router = require('./Routes/routes');
 const { NotFound } = require('./middleWares/NotFound');
+const { ErrorHandler } = require('./middleWares/ErrorHandler');
 
 
 const app = express()
@@ -25,3 +26,4 @@ Start()
 
 app.use('/api/v1/books' , router)
 app.use(NotFound)
+app.use(ErrorHandler)

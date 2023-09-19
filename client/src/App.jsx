@@ -10,6 +10,7 @@ import AddBook from './Pages/AddBook'
 import DeleteBook from './Pages/DeleteBook'
 import Model from './Components/Model'
 import InformationModel from './Components/InformationModel'
+import ImageModel from './Components/ImageModel'
 
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
 
   const  [showModel,setShowModel ] = useState(false)
   const  [showModelInformation,setShowModelInformation ] = useState(false)
+  const  [showModelImage,setShowModelImage] = useState(false)
   const  [msg,setMsg ] = useState('')
 
 
@@ -43,7 +45,7 @@ const App = () => {
   
   useEffect(()=>{
       fetchBooks()
-  },[data])
+  },[])
 
 
 const addBook = async () => {
@@ -119,8 +121,9 @@ const addBook = async () => {
       <GlobalStyleApp />
       <Model showModel={showModel} msg={msg} />
       <InformationModel showModelInformation={showModelInformation} setShowModelInformation={setShowModelInformation} data={data} paramID={paramID}/>
+      <ImageModel showModelImage={showModelImage} setShowModelImage={setShowModelImage} data={data} paramID={paramID}/>
       <Routes>
-        <Route path='/' element={< Home setParamID={setParamID} data={data} showModelInformation={showModelInformation} setShowModelInformation={setShowModelInformation} deleteBook={deleteBook}/>} />
+        <Route path='/' element={< Home showModelImage={showModelImage} setShowModelImage={setShowModelImage} setParamID={setParamID} data={data} showModelInformation={showModelInformation} setShowModelInformation={setShowModelInformation} deleteBook={deleteBook}/>} />
         <Route path='/addbook' element={<AddBook file={file} setFile={setFile} setMsg={setMsg} setShowModel={setShowModel} addBook={addBook} title={title} author={author} desc={desc} setDesc={setDesc} publishYear={publishYear}  setTitle={setTitle} setAuthor={setAuthor} setPublishYear={setPublishYear} />} />
         <Route path='/editbook/:id' element={<EditBook file={file} setFile={setFile} setMsg={setMsg}  setShowModel={setShowModel} data={data} updateBook={updateBook} addBook={addBook} title={title} author={author} desc={desc} setDesc={setDesc} publishYear={publishYear}  setTitle={setTitle} setAuthor={setAuthor} setPublishYear={setPublishYear} />} />
         <Route path='/deletebook/:id' element={<DeleteBook setMsg={setMsg} setShowModel={setShowModel} data={data}  deleteBook={deleteBook} addBook={addBook} title={title} author={author} publishYear={publishYear}  setTitle={setTitle} setAuthor={setAuthor} setPublishYear={setPublishYear} />} />
