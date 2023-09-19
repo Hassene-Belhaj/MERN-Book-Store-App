@@ -45,7 +45,7 @@ const App = () => {
   
   useEffect(()=>{
       fetchBooks()
-  },[])
+  },[data])
 
 
 const addBook = async () => {

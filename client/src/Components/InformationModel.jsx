@@ -7,14 +7,14 @@ import styled from 'styled-components'
 const Information = styled.div`
 position: absolute;
 top: 50%;
-left: ${({$showModelInformation})=>$showModelInformation ? '50%' : '-150%'};
-transition: all 0.35s ease-in-out;
+left:50%;
+transition: all 0.5s ease-in-out;
 transform: translate(-50%,-50%);
 width: 800px;
 height: auto;
 background-color: #fff;
 border-radius: 7px;
-display: flex;
+display: ${({$showModelInformation})=>$showModelInformation ? 'flex' : 'none'};
 z-index: 3000;
 overflow: hidden;
 `
@@ -60,6 +60,8 @@ margin: 0 1rem;
 const InformationModel = ({showModelInformation,setShowModelInformation,data,paramID}) => {
 
    const findBook = data.find((item)=>item._id === paramID )
+
+   
 
   return (
     < >

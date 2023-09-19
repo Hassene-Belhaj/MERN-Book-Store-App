@@ -1,27 +1,27 @@
-class customApiError extends Error {
+class ApiError extends Error {
     constructor(message,statusCode){
-        super(message)
+        super(message);
         this.statusCode = statusCode
     }
 }
 
+
 const CreateCustomError = (message,statusCode) => {
-    return new customApiError(message,statusCode)
+    return new ApiError(message , statusCode)
 }
 
 
-const ErrorHandler = (err,req,res,next) => {
-// console.log(err);
-if(err instanceof customApiError) {
-    return res.status(err.statusCode).json({msg : err.message})
+const ErrorHandler =  (err,_req,res,_next) => {
+    console.log(err);
+    if(err instanceof ApiError) {
+        res.status(err.statusCode).json({msg : err.message})
+    }
+    res.status(500).json({msg : 'something went wrong ! try again later' })
 }
- else if (err.name ==='CastError' && err.kind === 'objectId'){
-        return res.status(404).json({msg : 'Resource notFound'}) 
-    } 
-return res.status(500).json({msg : 'something went wrong ! try again later'})
-}
+
+
 
 
 module.exports = {
-    customApiError,CreateCustomError,ErrorHandler
+    CreateCustomError,ErrorHandler
 };
