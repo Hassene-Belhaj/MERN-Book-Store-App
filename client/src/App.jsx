@@ -8,9 +8,9 @@ import { BrowserRouter as Router , Routes,Route } from 'react-router-dom'
 import EditBook from './Pages/EditBook'
 import AddBook from './Pages/AddBook'
 import DeleteBook from './Pages/DeleteBook'
-import Model from './Components/Model'
-import InformationModel from './Components/InformationModel'
-import ImageModel from './Components/ImageModel'
+import Modal from './Components/Modal'
+import InformationModal from './Components/InformationModal'
+import ImageModal from './Components/ImageModal'
 
 
 const App = () => {
@@ -26,9 +26,9 @@ const App = () => {
   const [file ,setFile] = useState([])
   const [paramID , setParamID] = useState(null)
 
-  const  [showModel,setShowModel ] = useState(false)
-  const  [showModelInformation,setShowModelInformation ] = useState(false)
-  const  [showModelImage,setShowModelImage] = useState(false)
+  const  [showModal,setShowModal ] = useState(false)
+  const  [showModalInformation,setShowModalInformation ] = useState(false)
+  const  [showModalImage,setShowModalImage] = useState(false)
   const  [msg,setMsg ] = useState('')
 
 
@@ -61,11 +61,11 @@ const addBook = async () => {
    
     if(resp.data.success === true) {
       setTimeout(() => {
-        setShowModel(false) 
+        setShowModal(false) 
         setMsg('')
       }, 3000)
         setMsg('book added Successfully')
-        setShowModel(true)  
+        setShowModal(true)  
       }  
   } catch (error) {
     console.log(error);
@@ -81,11 +81,11 @@ const addBook = async () => {
   })
     if(resp.data.success === true) {
     setTimeout(() => {
-      setShowModel(false) 
+      setShowModal(false) 
       setMsg('')
     }, 3000)
       setMsg('book deleted Successfully')
-      setShowModel(true)
+      setShowModal(true)
     }
    
   } catch (error) {
@@ -105,11 +105,11 @@ const addBook = async () => {
     })
      if(resp.data.success === true) {
       setTimeout(() => {
-        setShowModel(false) 
+        setShowModal(false) 
         setMsg('')
       },3000)
         setMsg('book updated Successfully')
-        setShowModel(true)
+        setShowModal(true)
       }
   } catch (error) {
     console.log(error);
@@ -119,14 +119,14 @@ const addBook = async () => {
   return (
     <Router>
       <GlobalStyleApp />
-      <Model showModel={showModel} msg={msg} />
-      <InformationModel showModelInformation={showModelInformation} setShowModelInformation={setShowModelInformation} data={data} paramID={paramID}/>
-      <ImageModel showModelImage={showModelImage} setShowModelImage={setShowModelImage} data={data} paramID={paramID}/>
+      <Modal showModal={showModal} msg={msg} />
+      <InformationModal showModalInformation={showModalInformation} setShowModalInformation={setShowModalInformation} data={data} paramID={paramID}/>
+      <ImageModal showModalImage={showModalImage} setShowModalImage={setShowModalImage} data={data} paramID={paramID}/>
       <Routes>
-        <Route path='/' element={< Home showModelImage={showModelImage} setShowModelImage={setShowModelImage} setParamID={setParamID} data={data} showModelInformation={showModelInformation} setShowModelInformation={setShowModelInformation} deleteBook={deleteBook}/>} />
-        <Route path='/addbook' element={<AddBook file={file} setFile={setFile} setMsg={setMsg} setShowModel={setShowModel} addBook={addBook} title={title} author={author} desc={desc} setDesc={setDesc} publishYear={publishYear}  setTitle={setTitle} setAuthor={setAuthor} setPublishYear={setPublishYear} />} />
-        <Route path='/editbook/:id' element={<EditBook file={file} setFile={setFile} setMsg={setMsg}  setShowModel={setShowModel} data={data} updateBook={updateBook} addBook={addBook} title={title} author={author} desc={desc} setDesc={setDesc} publishYear={publishYear}  setTitle={setTitle} setAuthor={setAuthor} setPublishYear={setPublishYear} />} />
-        <Route path='/deletebook/:id' element={<DeleteBook setMsg={setMsg} setShowModel={setShowModel} data={data}  deleteBook={deleteBook} addBook={addBook} title={title} author={author} publishYear={publishYear}  setTitle={setTitle} setAuthor={setAuthor} setPublishYear={setPublishYear} />} />
+        <Route path='/' element={< Home showModalImage={showModalImage} setShowModalImage={setShowModalImage} setParamID={setParamID} data={data} showModalInformation={showModalInformation} setShowModalInformation={setShowModalInformation} deleteBook={deleteBook}/>} />
+        <Route path='/addbook' element={<AddBook file={file} setFile={setFile} setMsg={setMsg} setShowModal={setShowModal} addBook={addBook} title={title} author={author} desc={desc} setDesc={setDesc} publishYear={publishYear}  setTitle={setTitle} setAuthor={setAuthor} setPublishYear={setPublishYear} />} />
+        <Route path='/editbook/:id' element={<EditBook file={file} setFile={setFile} setMsg={setMsg}  setShowModal={setShowModal} data={data} updateBook={updateBook} addBook={addBook} title={title} author={author} desc={desc} setDesc={setDesc} publishYear={publishYear}  setTitle={setTitle} setAuthor={setAuthor} setPublishYear={setPublishYear} />} />
+        <Route path='/deletebook/:id' element={<DeleteBook setMsg={setMsg} setShowModal={setShowModal} data={data}  deleteBook={deleteBook} addBook={addBook} title={title} author={author} publishYear={publishYear}  setTitle={setTitle} setAuthor={setAuthor} setPublishYear={setPublishYear} />} />
       </Routes> 
     </Router>
   )

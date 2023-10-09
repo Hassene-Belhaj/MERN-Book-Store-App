@@ -7,14 +7,14 @@ import styled from 'styled-components'
 const ContainerRGBA = styled.div`
 position: fixed;
 inset: 0;
-display: ${({$showModelImage})=>$showModelImage? 'flex' : 'none'};
+display: ${({$showModalImage})=>$showModalImage? 'flex' : 'none'};
 transition: all 0.3s ease-in-out;
 background-color: rgba(0,0,0,0.7);
 cursor: pointer;
 `
 
 
-const ImageModelDiv = styled.div`
+const ImageModalDiv = styled.div`
 position: fixed;
 top: 50%;
 left:50%;
@@ -25,7 +25,7 @@ height: auto;
 padding: 5rem;
 background-color: #fff;
 border-radius: 7px;
-display: ${({$showModelImage})=>$showModelImage? 'flex' : 'none'};
+display: ${({$showModalImage})=>$showModalImage? 'flex' : 'none'};
 justify-content: center;
 align-items: center;
 z-index: 3000;
@@ -40,17 +40,17 @@ top: 1rem;
 cursor: pointer;
 `
 
-const ImageModel = ({data,paramID,showModelImage,setShowModelImage}) => {
+const ImageModal = ({data,paramID,showModalImage,setShowModalImage}) => {
     const findBook = data.find((item)=>item._id === paramID)
   return (
     <>
-     <ContainerRGBA $showModelImage={showModelImage} onClick={()=>setShowModelImage(false)}></ContainerRGBA>
-     <ImageModelDiv $showModelImage={showModelImage}>
-     <IconClose  onClick={()=>setShowModelImage(!showModelImage)} size='20'  />
+     <ContainerRGBA $showModalImage={showModalImage} onClick={()=>setShowModalImage(false)}></ContainerRGBA>
+     <ImageModalDiv $showModalImage={showModalImage}>
+     <IconClose  onClick={()=>setShowModalImage(!showModalImage)} size='20'  />
         <Image src={findBook?.image} alt="" />
-     </ImageModelDiv>
+     </ImageModalDiv>
     </>
   )
 }
 
-export default ImageModel
+export default ImageModal

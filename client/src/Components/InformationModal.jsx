@@ -14,14 +14,14 @@ width: 800px;
 height: auto;
 background-color: #fff;
 border-radius: 7px;
-display: ${({$showModelInformation})=>$showModelInformation ? 'flex' : 'none'};
+display: ${({$showModalInformation})=>$showModalInformation ? 'flex' : 'none'};
 z-index: 3000;
 overflow: hidden;
 `
 const ContainerRGBA = styled.div`
 position: fixed;
 inset: 0;
-display: ${({$showModelInformation})=>$showModelInformation? 'flex' : 'none'};
+display: ${({$showModalInformation})=>$showModalInformation? 'flex' : 'none'};
 transition: all 0.3s ease-in-out;
 background-color: rgba(0,0,0,0.7);
 cursor: pointer;
@@ -57,7 +57,7 @@ const Desc = styled.p`
 margin: 0 1rem;
 `
 
-const InformationModel = ({showModelInformation,setShowModelInformation,data,paramID}) => {
+const InformationModal = ({showModalInformation,setShowModalInformation,data,paramID}) => {
 
    const findBook = data.find((item)=>item._id === paramID )
 
@@ -65,9 +65,9 @@ const InformationModel = ({showModelInformation,setShowModelInformation,data,par
 
   return (
     < >
-        <ContainerRGBA $showModelInformation={showModelInformation} onClick={()=>setShowModelInformation(false)} ></ContainerRGBA>
-        <Information $showModelInformation={showModelInformation}>
-            <CloseIcon size={20} onClick={()=>setShowModelInformation(!showModelInformation)} />
+        <ContainerRGBA $showModalInformation={showModalInformation} onClick={()=>setShowModalInformation(false)} ></ContainerRGBA>
+        <Information $showModalInformation={showModalInformation}>
+            <CloseIcon size={20} onClick={()=>setShowModalInformation(!showModalInformation)} />
           <Image src={findBook?.image} alt="" />
           <InformationRight>
             <Title>{findBook?.title}</Title>
@@ -81,4 +81,4 @@ const InformationModel = ({showModelInformation,setShowModelInformation,data,par
   )
 }
 
-export default InformationModel
+export default InformationModal

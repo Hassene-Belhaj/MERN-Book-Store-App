@@ -3,10 +3,10 @@ import styled from 'styled-components'
 import { AiFillCheckCircle } from 'react-icons/ai'
 
 
-const ModelContainer = styled.div`
+const ModalContainer = styled.div`
 position: absolute;
 bottom: 5px;
-left: ${({$showModel})=>$showModel ? '1px' : '-150%'};
+left: ${({$showModal})=>$showModal ? '1px' : '-150%'};
 transition: all ease-in-out 0.5s;
 width: 20rem ;
 height : 3rem ;
@@ -25,17 +25,17 @@ margin: auto;
 const Title = styled.h4`
 `
 
-const Model = ({showModel,msg}) => {
+const Modal = ({showModal,msg}) => {
 
 
   return (
-        <ModelContainer $showModel={showModel}>
+        <ModalContainer $showModal={showModal}>
             <Message>
                 <AiFillCheckCircle  style={{marginRight:'1rem'}} color='#fff' size={20}/>
                  <Title>{msg}</Title>             
             </Message>
-        </ModelContainer>
+        </ModalContainer>
   )
 }
 
-export default Model
+export default Modal
